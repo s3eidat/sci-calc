@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; media-src 'self' data: blob:; connect-src 'self' data: blob:; worker-src 'self' blob:; manifest-src 'self'; form-action 'none'; base-uri 'none'; object-src 'none'">
+<meta name="referrer" content="no-referrer">
+<title>Scientific Calculator — Free Online Scientific Calculator | S3eidat Tools</title>
+<meta name="description" content="A full scientific calculator: trig in degrees, radians or grads, logs, powers and roots, factorial, nCr and nPr, memory, ANS, constants and history. Keyboard friendly. Free and private.">
+<meta property="og:title" content="Scientific Calculator — free, private, keyboard friendly">
+<meta property="og:description" content="Trig, logs, powers, factorial, memory and history. Runs 100% in your browser.">
+<link rel="icon" href="kit/icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="kit/kit.css">
+<link rel="stylesheet" href="app.css">
+<script src="kit/kit.js"></script>
+<!--s3:seo-->
+<link rel="canonical" href="https://s3eidat.github.io/sci-calc/">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0d0f12">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="S3eidat Tools">
+<meta property="og:url" content="https://s3eidat.github.io/sci-calc/">
+<meta property="og:image" content="https://s3eidat.github.io/sci-calc/screenshot.png">
+<meta property="og:image:width" content="1280"><meta property="og:image:height" content="800">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Scientific Calculator — A full scientific calculator">
+<meta name="twitter:description" content="A full scientific calculator. Free, private and runs 100% in your browser: no sign-up, no uploads.">
+<meta name="twitter:image" content="https://s3eidat.github.io/sci-calc/screenshot.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Scientific Calculator", "url": "https://s3eidat.github.io/sci-calc/", "description": "A full scientific calculator. Free, private and runs 100% in your browser: no sign-up, no uploads.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any (web browser)", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "image": "https://s3eidat.github.io/sci-calc/screenshot.png", "author": {"@type": "Person", "name": "s3eidat", "url": "https://github.com/s3eidat"}}</script>
+<!--/s3:seo-->
+</head>
+<body data-tool="sci-calc">
+<main class="s3-main">
+  <section class="s3-hero">
+    <h1>Scientific Calculator</h1>
+    <p>Type an expression or tap the keys. Correct order of operations, trig in degrees, radians or grads, memory, ANS and a history you can click to reuse.</p>
+  </section>
+
+  <div class="sc-grid">
+    <section class="card sc-calc">
+      <div class="sc-display">
+        <div class="sc-flags">
+          <div class="seg sc-angle" id="angle" role="group" aria-label="Angle unit">
+            <button type="button" data-v="deg" aria-pressed="true">DEG</button>
+            <button type="button" data-v="rad" aria-pressed="false">RAD</button>
+            <button type="button" data-v="grad" aria-pressed="false">GRAD</button>
+          </div>
+          <span class="grow"></span>
+          <span class="chip" id="mflag" hidden title="Memory">M</span>
+          <button class="chip sc-fmt" type="button" id="fmt" title="Number format">NORM</button>
+        </div>
+        <label for="expr" class="sr">Expression</label>
+        <input id="expr" class="sc-expr" dir="ltr" autocomplete="off" spellcheck="false" inputmode="text" placeholder="0">
+        <div class="sc-result" id="result" aria-live="polite">0</div>
+      </div>
+
+      <div class="sc-mem row">
+        <button type="button" class="k k-m" data-act="mc">MC</button>
+        <button type="button" class="k k-m" data-act="mr">MR</button>
+        <button type="button" class="k k-m" data-act="mplus">M+</button>
+        <button type="button" class="k k-m" data-act="mminus">M−</button>
+        <label class="sc-const"><span class="sr">Insert a constant</span>
+          <select class="select" id="consts">
+            <option value="">Constants…</option>
+            <option value="299792458">c · speed of light (m/s)</option>
+            <option value="9.80665">g · standard gravity (m/s²)</option>
+            <option value="6.67430e-11">G · gravitational constant</option>
+            <option value="6.62607015e-34">h · Planck constant (J·s)</option>
+            <option value="1.380649e-23">k · Boltzmann constant (J/K)</option>
+            <option value="6.02214076e23">Nₐ · Avogadro constant (1/mol)</option>
+            <option value="1.602176634e-19">e · elementary charge (C)</option>
+            <option value="9.1093837015e-31">mₑ · electron mass (kg)</option>
+            <option value="8.314462618">R · gas constant (J/mol·K)</option>
+            <option value="phi">φ · golden ratio</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="sc-pads">
+        <div class="sc-pad sc-sci" id="sci">
+          <button type="button" class="k k-2nd" data-act="2nd" aria-pressed="false">2nd</button>
+          <button type="button" class="k" data-k="sin(" data-k2="asin(" data-l2="sin⁻¹">sin</button>
+          <button type="button" class="k" data-k="cos(" data-k2="acos(" data-l2="cos⁻¹">cos</button>
+          <button type="button" class="k" data-k="tan(" data-k2="atan(" data-l2="tan⁻¹">tan</button>
+          <button type="button" class="k" data-k="π" data-k2="e" data-l2="e">π</button>
+          <button type="button" class="k" data-k="sinh(" data-k2="asinh(" data-l2="sinh⁻¹">sinh</button>
+          <button type="button" class="k" data-k="cosh(" data-k2="acosh(" data-l2="cosh⁻¹">cosh</button>
+          <button type="button" class="k" data-k="tanh(" data-k2="atanh(" data-l2="tanh⁻¹">tanh</button>
+          <button type="button" class="k" data-k="ln(" data-k2="e^(" data-l2="eˣ">ln</button>
+          <button type="button" class="k" data-k="log(" data-k2="10^(" data-l2="10ˣ">log</button>
+          <button type="button" class="k" data-k="^2" data-k2="√(" data-l2="√x">x²</button>
+          <button type="button" class="k" data-k="^" data-k2="root(" data-l2="ʸ√x">xʸ</button>
+          <button type="button" class="k" data-k="^3" data-k2="cbrt(" data-l2="∛x">x³</button>
+          <button type="button" class="k" data-k="^(-1)" data-k2="abs(" data-l2="|x|">1/x</button>
+          <button type="button" class="k" data-k="!" data-k2="mod(" data-l2="mod">x!</button>
+          <button type="button" class="k" data-k="nCr(" data-k2="nPr(" data-l2="nPr">nCr</button>
+          <button type="button" class="k" data-k="(">(</button>
+          <button type="button" class="k" data-k=")">)</button>
+          <button type="button" class="k" data-k=",">,</button>
+          <button type="button" class="k" data-k="%">%</button>
+        </div>
+        <div class="sc-pad sc-num" id="num">
+          <button type="button" class="k k-n" data-k="7">7</button>
+          <button type="button" class="k k-n" data-k="8">8</button>
+          <button type="button" class="k k-n" data-k="9">9</button>
+          <button type="button" class="k k-op" data-k="÷">÷</button>
+          <button type="button" class="k k-ac" data-act="ac">AC</button>
+          <button type="button" class="k k-n" data-k="4">4</button>
+          <button type="button" class="k k-n" data-k="5">5</button>
+          <button type="button" class="k k-n" data-k="6">6</button>
+          <button type="button" class="k k-op" data-k="×">×</button>
+          <button type="button" class="k" data-act="del" aria-label="Delete">⌫</button>
+          <button type="button" class="k k-n" data-k="1">1</button>
+          <button type="button" class="k k-n" data-k="2">2</button>
+          <button type="button" class="k k-n" data-k="3">3</button>
+          <button type="button" class="k k-op" data-k="−">−</button>
+          <button type="button" class="k" data-k="ans">Ans</button>
+          <button type="button" class="k k-n" data-k="0">0</button>
+          <button type="button" class="k k-n" data-k=".">.</button>
+          <button type="button" class="k" data-act="neg" aria-label="Change sign">±</button>
+          <button type="button" class="k k-op" data-k="+">+</button>
+          <button type="button" class="k" data-k="e" title="Times ten to the power (EE)">EE</button>
+          <button type="button" class="k k-eq" data-act="eq">=</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="card sc-hist">
+      <div class="row between">
+        <h2>History</h2>
+        <div class="row">
+          <button class="btn ghost small" type="button" id="copy"><svg class="i"><use href="#i-copy"/></svg>Copy result</button>
+          <button class="btn ghost small" type="button" id="clearHist"><svg class="i"><use href="#i-trash"/></svg>Clear</button>
+        </div>
+      </div>
+      <ol id="hist" class="sc-list"></ol>
+      <p class="faint sc-keys">Keyboard: type normally, <kbd>Enter</kbd> = , <kbd>Esc</kbd> clears, <kbd>^</kbd> power, <kbd>!</kbd> factorial. Click an expression to edit it again, or a result to insert it.</p>
+    </section>
+  </div>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
